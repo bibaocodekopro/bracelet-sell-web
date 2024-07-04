@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-100">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Thanh toán</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        // Lấy giá trị của tham số 'id' từ URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var productId = urlParams.get('id');
+        var quantity = urlParams.get('quantity');
+
+        console.log('Product ID:', productId);
+        console.log('Quantity:', quantity);
+
+
+        // Kiểm tra nếu 'id' không tồn tại hoặc không phải là số nguyên dương
+        if (!productId || isNaN(productId) || parseInt(productId) <= 0) {
+            console.error('Invalid product ID');
+            return;
+        } if (!quantity || isNaN(quantity)) {
+            console.error('Invalid quantity ');
+            return;
+        }
+
+        // Lấy dữ liệu từ file JSON (giả sử đã load sẵn trong HTML)
+        var productsData = {
+            "products": [
+                {
+                    "id": 1,
+                    "name": "Vòng tay handmade hạt thủ công tím mộng mơ dành cho nữ",
+                    "price": "25.000đ",
+                    "description": "Vòng tay được tạo bằng những hạt lưu ly nhiều màu sắc - từ hồng, tím đến trắng, được đan kết thành những sợi dây mảnh mai. Những bông hoa nhỏ xinh bằng ngọc trai tô điểm thêm vẻ duyên dáng và nữ tính cho thiết kế. Tổng thể mang vẻ đẹp tinh khôi, lãng mạn và nhẹ nhàng, phù hợp cho mọi cô nàng.",
+                    "material": "",
+                    "size": "17cm + tăng đơ",
+                    "color": "",
+                    "size_Xs": "",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_1.png"
+                },
+                {
+                    "id": 2,
+                    "name": "Vòng hoa kết pha lê",
+                    "price": "40.000đ",
+                    "description": "Đây là một thiết kế vòng tay với sự kết hợp tinh tế giữa những viên ngọc trai trắng tạo thành hình nơ với hạt pha lê hình trái tim màu hồng và các viên đá màu xanh lá cây. Chúng tạo thành một tác phẩm handmade tinh xảo, toát lên vẻ đẹp mong manh, lãng mạn và độc đáo. Thật là một món trang sức duyên dáng và đáng yêu dành cho phái nữ.",
+                    "material": "",
+                    "size": "",
+                    "color": "",
+                    "size_Xs": "15cm + tăng đơ",
+                    "size_M": "17cm + tăng đơ",
+                    "size_L": "19cm + tăng đơ",
+                    "image": "image/product/product_2.png"
+                },
+                {
+                    "id": 3,
+                    "name": "Vòng cổ ngôi sao ngọc trai nữ",
+                    "price": "85.000đ",
+                    "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng cổ này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
+                    "material": "Chất liệu: Bạc và ngọc trai",
+                    "size": "- Chiều dài chuỗi: Khoảng 45 cm (có thể điều chỉnh) Kích thước hạt ngọc trai: Khoảng 6 mm. - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 10 mm",
+                    "color": "Màu sắc: Bạc và trắng",
+                    "size_Xs": " ",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_3.png"
+                },
+                {
+                    "id": 4,
+                    "name": "Vòng tay ngọc trai ngôi sao",
+                    "price": "60.000đ",
+                    "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng tay này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
+                    "material": "Chất liệu: Bạc và ngọc trai",
+                    "size": "- Chiều dài chuỗi: Khoảng 18 cm (có thể điều chỉnh) - Kích thước hạt ngọc trai: Khoảng 4 mm - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 8 mm",
+                    "color": "Màu sắc: Bạc và trắng",
+                    "size_Xs": "",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_4.png"
+                },
+                {
+                    "id": 5,
+                    "name": "Colorful Daisy Chains.",
+                    "price": "65.000đ",
+                    "description": "Vòng cổ handmade Colorful Daisy được làm từ những hạt ngọc trai và nhiều hạt nhựa màu pastel khác nhau, được sắp xếp thành những bông hoa cúc họa mi nhỏ xinh. Với những tông màu rực rỡ và vẻ ngoài tươi sáng của ngọc trai, tạo cảm giác vui tươi và năng động.Tránh tiếp xúc với nước, hóa chất, chất tẩy rửa mạnh để bảo quản màu sắc sản phẩm lâu hơn.",
+                    "material": "",
+                    "size": "Free upsize với những bạn có nhu cầu.",
+                    "color": "",
+                    "size_Xs": "",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_5s.png"
+                },
+                {
+                    "id": 6,
+                    "name": "Vòng tay Dâu tây",
+                    "price": "25.000đ",
+                    "description": "Vòng tay Dâu tây được thiết kế gồm những hạt ngọc trai nhỏ kết nối với nhau, điểm nhấn là những quả dây tây nhỏ xinh được làm từ các hạt nhựa đỏ và xanh, tạo nên cảm giác trẻ trung, tươi mới và ngọt ngào.Tránh tiếp xúc với nước, hóa chất, chất tẩy rửa mạnh để bảo quản màu sắc sản phẩm lâu hơn.",
+                    "material": "",
+                    "size": "Size: 13,5cm (+5cm tăng đơ)",
+                    "color": "",
+                    "size_Xs": " ",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_6.png"
+                },
+                {
+                    "id": 7,
+                    "name": "Vòng tay Hoa hồng",
+                    "price": "55.000đ",
+                    "description": "Vòng tay được tạo thành từ nhiều loại hạt  được sắp xếp theo thiết kế hình tròn. Các yếu tố chính bao gồm:- Hạt ngọc trai màu hồng và trắng- Hạt hình giọt nước xanh- Hạt pha lê hoặc thủy tinh nhỏ với nhiều hình dạng khác nhau- Móc cài hoặc charm màu bạc tinh tế với thiết kế hình chữ thập- Một bông hồng nhỏ bằng nhựa màu hồng treo ở giữa",
+                    "material": "",
+                    "size": "",
+                    "color": "",
+                    "size_Xs": " ",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_7.png"
+                },
+                {
+                    "id": 8,
+                    "name": "Vòng tay Hoa hồng đỏ",
+                    "price": "70.000đ",
+                    "description": "Với thiết kế trẻ trung và các loại hạt với hình dáng và màu sắc khác nhau sẽ mang đến cho bố cục của vòng và outfit của bạn một nét đẹp dễ thương của người con gái Việt Nam",
+                    "material": "",
+                    "size": "",
+                    "color": "",
+                    "size_Xs": " ",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_8.png"
+                },
+                {
+                    "id": 9,
+                    "name": "Vòng tay Ngọc trai",
+                    "price": "70.000đ",
+                    "description": "Sự kết hợp giữa các vỏ sò, viên ngọc trai và các chi tiết màu sắc biển cả làm cho người mang có cảm giác FRESH năng động và trẻ trung",
+                    "material": "",
+                    "size": "",
+                    "color": "",
+                    "size_Xs": " ",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_9.png"
+                },
+                {
+                    "id": 10,
+                    "name": "Vòng cổ hoa",
+                    "price": "60.000đ",
+                    "description": "Sự đan xen giữa các hoa nhỏ và hoa lớn và chi tiết ôm sát cổ sẽ là một món phụ kiện khá đặc biệt đối với người mang chúng",
+                    "material": "",
+                    "size": "",
+                    "color": "",
+                    "size_Xs": " ",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_10.png"
+                },
+                {
+                    "id": 11,
+                    "name": "Vòng cổ ngôi sao ngọc trai nữ",
+                    "price": "85.000đ",
+                    "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng cổ này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
+                    "material": "Chất liệu: Bạc và ngọc trai",
+                    "size": "- Chiều dài chuỗi: Khoảng 45 cm (có thể điều chỉnh) Kích thước hạt ngọc trai: Khoảng 6 mm. - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 10 mm",
+                    "color": "Màu sắc: Bạc và trắng",
+                    "size_Xs": " ",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_11.png"
+                },
+                {
+                    "id": 12,
+                    "name": "Vòng ngọc nơ xinh",
+                    "price": "50.000đ",
+                    "description": "Với chi tiết nơ xinh sẽ là một điểm nhấn đặc biệt dành cho đôi tay của người phụ nữ giúp tay đỡ trống và thể hiện được tính cách diệu dàng của mình",
+                    "material": "",
+                    "size": "",
+                    "color": "",
+                    "size_Xs": " ",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_12.png"
+                },
+                {
+                    "id": 13,
+                    "name": "Vòng tay chú cá nhỏ",
+                    "price": "40.000đ",
+                    "description": "Vòng tay chú cá nhỏ được phối giữa các chi tiết kim loại, các hạt và đặc biệt là chú cá nhỏ xinh sẽ là một sự lựa chọn khá thú vị dành cho outfit của bạn.",
+                    "material": "",
+                    "size": "",
+                    "color": "",
+                    "size_Xs": " ",
+                    "size_M": "",
+                    "size_L": "",
+                    "image": "image/product/product_13.png"
+                }
+            ]
+        }
+
+        // Tìm sản phẩm theo ID
+        var product = productsData.products.find(function (p) {
+            return p.id === parseInt(productId);
+        });
+
+        // Kiểm tra nếu không tìm thấy sản phẩm
+        if (!product) {
+            console.error('Product not found');
+            return;
+        }
+
+        // Hiển thị thông tin sản phẩm trên trang web
+
+        $('.name-product').text(product.name)
+        $('.total').text(product.name + ' x ' + quantity);
+        var price = product.price.replace(/\./g, '');
+        $('.sum').text(product.price + ' x ' + quantity);
+        var endTotal = parseInt(price) * parseInt(quantity);
+        endTotal = endTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + 'đ';
+        $('.end-total').text(endTotal)
+    });
+</script>
+
+<body>
+    <div class="containter pb-5">
+        <header class="w-100 d-flex justify-content-between px-5">
+            <div class="logo d-flex my-auto">
+                <a href="index.html">
+                    <img src="image/icon/logo.png" alt="" width="60px">
+                </a>
+
+            </div>
+            <div class="titles d-flex w-75 justify-content-around my-auto">
+                <div class="title d-flex">
+                    <a href="index.html" class="my-auto"> Trang chủ</a>
+                </div>
+                <div class="title d-flex">
+                    <a href="" class="my-auto"> Tất cả sản phẩm</a>
+
+                </div>
+                <div class="title d-flex">
+                    <a href="" class="my-auto">Liên hệ chúng tôi</a>
+
+                </div>
+                <div class="cart d-flex mx-1">
+                    <a class="d-flex" href="#">
+                        <p class="my-auto">Giỏ hàng</p>
+                        <img src="image/icon/cart-icon.png" alt="" width="40px">
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="contact d-flex my-auto">
+                <div class="contact-icon mx-1">
+                    <img src="image/icon/facebook-logo.png" alt="" width="20px">
+                </div>
+                <div class="contact-icon mx-1">
+                    <img src="image/icon/ins-logo.png" alt="" width="20px">
+                </div>
+            </div>
+        </header>
+
+        <main role="main ">
+            <div class="container mt-4">
+                <div class="py-5 text-center">
+                    <i class="fa fa-credit-card fa-4x" aria-hidden="true"></i>
+                    <h2>Đặt hàng thành công</h2>
+                    <p class="lead">Cảm ơn bạn đã mua hàng ở shop mình ạ. Hàng sẽ được chuyển đến bạn trong thời gian
+                        gần nhất !!!</p>
+                </div>
+            </div>
+            <!-- End block content -->
+        </main>
+
+    </div>
+
+</body>
+
+</html>
