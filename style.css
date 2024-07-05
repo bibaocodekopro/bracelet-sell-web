@@ -135,7 +135,19 @@ body {
   --bs-btn-disabled-border-color: #41403E;
   --bs-gradient: none;
 }
-
+.card-body{
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.img-fluid {
+  height: 300px;
+}
+.img-logo{
+  width: 60px;
+  height: 60px;
+}
 .btn-dark {
   padding: 1.2rem 3rem;
   font-size: 1.1875rem;
