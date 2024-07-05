@@ -110,10 +110,30 @@
       keepImg: true,
     });
   }
-
+  function updateFakeLog() {
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+    
+    // Tính thời gian còn lại trong ngày (giây)
+    var remainingSeconds = (23 - hours) * 3600 + (59 - minutes) * 60 + (59 - seconds);
+    
+    // Tính phần trăm thời gian đã trôi qua trong ngày
+    var totalSecondsInDay = 24 * 3600;
+    var percentageDayPassed = 1 - remainingSeconds / totalSecondsInDay;
+    
+    // Tính lượt truy cập giả
+    var maxVisits = 123;
+    var fakeVisits = Math.ceil(maxVisits * percentageDayPassed);
+    
+    // Cập nhật vào thẻ p với class fake-log
+    $('.fake-log').text( fakeVisits);
+}
   // document ready
   $(document).ready(function() {
-    
+  
+    updateFakeLog();
     initPreloader();
     initSwiper();
     initProductQty();
