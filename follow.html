@@ -248,7 +248,9 @@
         endTotal = endTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + 'đ';
         $('.end-total').text(endTotal)
     });
+
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body>
     <div class="preloader-wrapper">
@@ -431,84 +433,9 @@
     <div class="containter pb-5">
         <main role="main">
             <div class="container mt-4">
-                <div class="py-5 text-center">
-                    <i class="fa fa-credit-card fa-4x" aria-hidden="true"></i>
-                    <h2>Thanh toán</h2>
-                    <p class="lead">Vui lòng kiểm tra thông tin Khách hàng, thông tin Giỏ hàng trước khi Đặt hàng.
-                    </p>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4 order-md-2 mb-4">
-                        <h4 class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="text-muted">Giỏ hàng</span>
-                            <span class="badge badge-secondary badge-pill">2</span>
-                        </h4>
-                        <ul class="list-group mb-3">
-
-                            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                <div>
-                                    <h6 class="my-0 name-product"></h6>
-                                    <small class="total"></small>
-                                </div>
-                                <span class="sum"></span>
-                            </li>
-
-                            <li class="list-group-item d-flex justify-content-between">
-                                <span>Tổng thành tiền</span>
-                                <strong class="end-total">143520000</strong>
-                            </li>
-                        </ul>
-                        <div class="input-group sale">
-                            <input type="text" class="form-control " placeholder="Mã khuyến mãi">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-secondary">Xác nhận</button>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-8 order-md-1">
-                        <h4 class="mb-3">Thông tin khách hàng</h4>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label for="kh_ten">Họ tên</label>
-                                <input type="text" class="form-control" name="kh_ten" id="name" value="">
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="kh_diachi">Địa chỉ</label>
-                                <input type="text" class="form-control" name="kh_diachi" id="address" value="">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="kh_dienthoai">Điện thoại</label>
-                                <input type="text" class="form-control" name="kh_dienthoai" id="phoneNumber" value="">
-                            </div>
-                        </div>
-                        <h4 class=" mb-3">Hình thức thanh toán</h4>
-                        <div class="d-block my-3">
-                            <div class="custom-control custom-radio">
-                                <input id="httt-1" name="httt_ma" type="radio" class="custom-control-input" required=""
-                                    value="1" checked>
-                                <label class="custom-control-label" for="httt-1">Tiền mặt</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input id="httt-2" name="httt_ma" type="radio" class="custom-control-input" required=""
-                                    value="2">
-                                <label class="custom-control-label" for="httt-2">Chuyển khoản</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input id="httt-3" name="httt_ma" type="radio" class="custom-control-input" required=""
-                                    value="3">
-                                <label class="custom-control-label" for="httt-3">Ship COD</label>
-                            </div>
-                        </div>
-                        <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit" id="order" name="btnDatHang">Đặt
-                            hàng</button>
-                    </div>
-                </div>
-
-
+                <h2>Thống kê lượt truy cập trong tháng này</h2>
+                <canvas id="accessLogChart" style=" margin-top: 20px;"></canvas>
+                <p class="fake-log mt-2 " style="display: none;">0</p>
             </div>
             <!-- End block content -->
         </main>
@@ -683,9 +610,8 @@
                                 <a href="">SĐT</a>
                                 <a href="#" class="nav-link px-0">097 525 2048</a>
                             </div>
-                            <div class="mr-3">
-                                <a href="follow.html">Theo dõi truy cập</a>
-                            </div>
+
+
                         </div>
                         <div class="social-links w-100 mt-3 mx-auto">
                             <ul class="d-flex  list-unstyled gap-2 ">
@@ -712,9 +638,7 @@
                                 </li>
 
                             </ul>
-                            <div class="mr-3">
-                                <a href="follow.html">Theo dõi truy cập</a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -731,6 +655,9 @@
                                 <iconify-icon class="send-icon" icon="tabler:location-filled"></iconify-icon>
                             </form>
                         </div>
+                        <div class="mr-3">
+                            <a href="follow.html">Theo dõi truy cập</a>
+                        </div>
                     </div>
                 </div>
 
@@ -746,21 +673,87 @@
     <script src="js/script.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script>
-        function isVietnamesePhoneNumber(number) {
-            return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
-        }
-        $('#order').on('click', function () {
-            var name = $('#name').val()
-            var address = $('#address').val()
-            var phoneNumber = $('#phoneNumber').val()
-            if (name == '' || address == '' || phoneNumber == '') {
-                alert('Vui lòng nhập đủ!')
-            } else if (isVietnamesePhoneNumber(phoneNumber) == false) {
-                alert('Vui lòng nhập đúng định dạng số điện thoại')
-            } else {
-                window.location.href = 'done.html'
+        // Hàm tạo dữ liệu giả cho mỗi ngày từ đầu tháng đến hôm nay
+        function generateFakeData() {
+            var data = [];
+            var now = new Date();
+            var today = now.getDate();
+
+            for (var i = 1; i <= today; i++) {
+                var fakeVisits = Math.floor(Math.random() * 100) + 20; // Giả sử lượt truy cập từ 20 đến 120
+                data.push(fakeVisits);
             }
-        })
+
+            return data;
+        }
+
+        // Hàm cập nhật log giả cho ngày hôm nay
+        function updateFakeLog() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            // Tính thời gian còn lại trong ngày (giây)
+            var remainingSeconds = (23 - hours) * 3600 + (59 - minutes) * 60 + (59 - seconds);
+
+            // Tính phần trăm thời gian đã trôi qua trong ngày
+            var totalSecondsInDay = 24 * 3600;
+            var percentageDayPassed = 1 - remainingSeconds / totalSecondsInDay;
+
+            // Tính lượt truy cập giả
+            var maxVisits = 123;
+            var fakeVisits = Math.ceil(maxVisits * percentageDayPassed);
+
+            // Cập nhật vào thẻ p với class fake-log
+            $('.fake-log').text(fakeVisits);
+
+            return fakeVisits;
+        }
+
+        $(document).ready(function () {
+            var ctx = document.getElementById('accessLogChart').getContext('2d');
+
+            var fakeData = generateFakeData();
+            var todayFakeLog = updateFakeLog();
+            fakeData[new Date().getDate() - 1] = todayFakeLog; // Cập nhật log cho ngày hôm nay
+
+            var labels = [];
+            for (var i = 1; i <= fakeData.length; i++) {
+                labels.push(i);
+            }
+
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Lượt truy cập',
+                        data: fakeData,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Ngày'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Lượt truy cập'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
     </script>
 </body>
 
