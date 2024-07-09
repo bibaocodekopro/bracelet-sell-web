@@ -2,374 +2,371 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vòng tay Handmade</title>
-    <!-- Latest compiled and minified CSS -->
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vòng tay Handmade</title>
+  <!-- Latest compiled and minified CSS -->
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="css/vendor.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-   
+  <link rel="stylesheet" type="text/css" href="css/vendor.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
     rel="stylesheet">
-    <link rel="stylesheet" href="style-2.css">
-    
+  <link rel="stylesheet" href="style-2.css">
+
 </head>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <script>
-    $(document).ready(function () {
-        // Lấy giá trị của tham số 'id' từ URL
-        var urlParams = new URLSearchParams(window.location.search);
-        var productId = urlParams.get('id');
+  $(document).ready(function () {
+    // Lấy giá trị của tham số 'id' từ URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var productId = urlParams.get('id');
 
-        // Kiểm tra nếu 'id' không tồn tại hoặc không phải là số nguyên dương
-        if (!productId || isNaN(productId) || parseInt(productId) <= 0) {
-            console.error('Invalid product ID');
-            return;
-        }
+    // Kiểm tra nếu 'id' không tồn tại hoặc không phải là số nguyên dương
+    if (!productId || isNaN(productId) || parseInt(productId) <= 0) {
+      console.error('Invalid product ID');
+      return;
+    }
 
-        // Đường dẫn tới file JSON chứa thông tin sản phẩm
-        var jsonFile = 'products.json';
+    // Đường dẫn tới file JSON chứa thông tin sản phẩm
+    var jsonFile = 'products.json';
 
-        // Lấy dữ liệu từ file JSON (giả sử đã load sẵn trong HTML)
-        var productsData = {
-            "products": [
-                {
-                    "id": 1,
-                    "name": "Vòng tay handmade hạt thủ công tím mộng mơ dành cho nữ",
-                    "price": "25.000đ",
-                    "description": "Vòng tay được tạo bằng những hạt lưu ly nhiều màu sắc - từ hồng, tím đến trắng, được đan kết thành những sợi dây mảnh mai. Những bông hoa nhỏ xinh bằng ngọc trai tô điểm thêm vẻ duyên dáng và nữ tính cho thiết kế. Tổng thể mang vẻ đẹp tinh khôi, lãng mạn và nhẹ nhàng, phù hợp cho mọi cô nàng.",
-                    "material": "",
-                    "size": "17cm + tăng đơ",
-                    "color": "",
-                    "size_Xs": "",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_1.png"
-                },
-                {
-                    "id": 2,
-                    "name": "Vòng hoa kết pha lê",
-                    "price": "40.000đ",
-                    "description": "Đây là một thiết kế vòng tay với sự kết hợp tinh tế giữa những viên ngọc trai trắng tạo thành hình nơ với hạt pha lê hình trái tim màu hồng và các viên đá màu xanh lá cây. Chúng tạo thành một tác phẩm handmade tinh xảo, toát lên vẻ đẹp mong manh, lãng mạn và độc đáo. Thật là một món trang sức duyên dáng và đáng yêu dành cho phái nữ.",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": "15cm + tăng đơ",
-                    "size_M": "17cm + tăng đơ",
-                    "size_L": "19cm + tăng đơ",
-                    "image": "images/product/product_2.png"
-                },
-                {
-                    "id": 3,
-                    "name": "Vòng cổ ngôi sao ngọc trai nữ",
-                    "price": "85.000đ",
-                    "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng cổ này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
-                    "material": "Chất liệu: Bạc và ngọc trai",
-                    "size": "- Chiều dài chuỗi: Khoảng 45 cm (có thể điều chỉnh) Kích thước hạt ngọc trai: Khoảng 6 mm. - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 10 mm",
-                    "color": "Màu sắc: Bạc và trắng",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_3.png"
-                },
-                {
-                    "id": 4,
-                    "name": "Vòng tay ngọc trai ngôi sao",
-                    "price": "60.000đ",
-                    "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng tay này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
-                    "material": "Chất liệu: Bạc và ngọc trai",
-                    "size": "- Chiều dài chuỗi: Khoảng 18 cm (có thể điều chỉnh) - Kích thước hạt ngọc trai: Khoảng 4 mm - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 8 mm",
-                    "color": "Màu sắc: Bạc và trắng",
-                    "size_Xs": "",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_4.png"
-                },
-                {
-                    "id": 5,
-                    "name": "Colorful Daisy Chains.",
-                    "price": "65.000đ",
-                    "description": "Vòng cổ handmade Colorful Daisy được làm từ những hạt ngọc trai và nhiều hạt nhựa màu pastel khác nhau, được sắp xếp thành những bông hoa cúc họa mi nhỏ xinh. Với những tông màu rực rỡ và vẻ ngoài tươi sáng của ngọc trai, tạo cảm giác vui tươi và năng động.Tránh tiếp xúc với nước, hóa chất, chất tẩy rửa mạnh để bảo quản màu sắc sản phẩm lâu hơn.",
-                    "material": "",
-                    "size": "Free upsize với những bạn có nhu cầu.",
-                    "color": "",
-                    "size_Xs": "",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_5.png"
-                },
-                {
-                    "id": 6,
-                    "name": "Vòng tay Dâu tây",
-                    "price": "25.000đ",
-                    "description": "Vòng tay Dâu tây được thiết kế gồm những hạt ngọc trai nhỏ kết nối với nhau, điểm nhấn là những quả dây tây nhỏ xinh được làm từ các hạt nhựa đỏ và xanh, tạo nên cảm giác trẻ trung, tươi mới và ngọt ngào.Tránh tiếp xúc với nước, hóa chất, chất tẩy rửa mạnh để bảo quản màu sắc sản phẩm lâu hơn.",
-                    "material": "",
-                    "size": "Size: 13,5cm (+5cm tăng đơ)",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_6.png"
-                },
-                {
-                    "id": 7,
-                    "name": "Vòng tay Hoa hồng",
-                    "price": "55.000đ",
-                    "description": "Vòng tay được tạo thành từ nhiều loại hạt  được sắp xếp theo thiết kế hình tròn. Các yếu tố chính bao gồm:- Hạt ngọc trai màu hồng và trắng- Hạt hình giọt nước xanh- Hạt pha lê hoặc thủy tinh nhỏ với nhiều hình dạng khác nhau- Móc cài hoặc charm màu bạc tinh tế với thiết kế hình chữ thập- Một bông hồng nhỏ bằng nhựa màu hồng treo ở giữa",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_7.png"
-                },
-                {
-                    "id": 8,
-                    "name": "Vòng tay Hoa hồng đỏ",
-                    "price": "70.000đ",
-                    "description": "Với thiết kế trẻ trung và các loại hạt với hình dáng và màu sắc khác nhau sẽ mang đến cho bố cục của vòng và outfit của bạn một nét đẹp dễ thương của người con gái Việt Nam",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_8.png"
-                },
-                {
-                    "id": 9,
-                    "name": "Vòng tay Ngọc trai",
-                    "price": "70.000đ",
-                    "description": "Sự kết hợp giữa các vỏ sò, viên ngọc trai và các chi tiết màu sắc biển cả làm cho người mang có cảm giác FRESH năng động và trẻ trung",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_9.png"
-                },
-                {
-                    "id": 10,
-                    "name": "Vòng cổ hoa",
-                    "price": "60.000đ",
-                    "description": "Sự đan xen giữa các hoa nhỏ và hoa lớn và chi tiết ôm sát cổ sẽ là một món phụ kiện khá đặc biệt đối với người mang chúng",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_10.png"
-                },
-                {
-                    "id": 11,
-                    "name": "Vòng cổ ngôi sao ngọc trai nữ",
-                    "price": "85.000đ",
-                    "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng cổ này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
-                    "material": "Chất liệu: Bạc và ngọc trai",
-                    "size": "- Chiều dài chuỗi: Khoảng 45 cm (có thể điều chỉnh) Kích thước hạt ngọc trai: Khoảng 6 mm. - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 10 mm",
-                    "color": "Màu sắc: Bạc và trắng",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_11.png"
-                },
-                {
-                    "id": 12,
-                    "name": "Vòng ngọc nơ xinh",
-                    "price": "50.000đ",
-                    "description": "Với chi tiết nơ xinh sẽ là một điểm nhấn đặc biệt dành cho đôi tay của người phụ nữ giúp tay đỡ trống và thể hiện được tính cách diệu dàng của mình",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_12.png"
-                },
-                {
-                    "id": 13,
-                    "name": "Vòng tay chú cá nhỏ",
-                    "price": "40.000đ",
-                    "description": "Vòng tay chú cá nhỏ được phối giữa các chi tiết kim loại, các hạt và đặc biệt là chú cá nhỏ xinh sẽ là một sự lựa chọn khá thú vị dành cho outfit của bạn.",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_13.png"
-                }
-            ]
+    // Lấy dữ liệu từ file JSON (giả sử đã load sẵn trong HTML)
+    var productsData = {
+      "products": [
+        {
+          "id": 1,
+          "name": "Vòng tay handmade hạt thủ công tím mộng mơ dành cho nữ",
+          "price": "25.000đ",
+          "description": "Vòng tay được tạo bằng những hạt lưu ly nhiều màu sắc - từ hồng, tím đến trắng, được đan kết thành những sợi dây mảnh mai. Những bông hoa nhỏ xinh bằng ngọc trai tô điểm thêm vẻ duyên dáng và nữ tính cho thiết kế. Tổng thể mang vẻ đẹp tinh khôi, lãng mạn và nhẹ nhàng, phù hợp cho mọi cô nàng.",
+          "material": "",
+          "size": "17cm + tăng đơ",
+          "color": "",
+          "size_Xs": "",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_1.png"
+        },
+        {
+          "id": 2,
+          "name": "Vòng hoa kết pha lê",
+          "price": "40.000đ",
+          "description": "Đây là một thiết kế vòng tay với sự kết hợp tinh tế giữa những viên ngọc trai trắng tạo thành hình nơ với hạt pha lê hình trái tim màu hồng và các viên đá màu xanh lá cây. Chúng tạo thành một tác phẩm handmade tinh xảo, toát lên vẻ đẹp mong manh, lãng mạn và độc đáo. Thật là một món trang sức duyên dáng và đáng yêu dành cho phái nữ.",
+          "material": "",
+          "size": "",
+          "color": "",
+          "size_Xs": "15cm + tăng đơ",
+          "size_M": "17cm + tăng đơ",
+          "size_L": "19cm + tăng đơ",
+          "image": "images/product/product_2.png"
+        },
+        {
+          "id": 3,
+          "name": "Vòng cổ ngôi sao ngọc trai nữ",
+          "price": "85.000đ",
+          "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng cổ này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
+          "material": "Chất liệu: Bạc và ngọc trai",
+          "size": "- Chiều dài chuỗi: Khoảng 45 cm (có thể điều chỉnh) Kích thước hạt ngọc trai: Khoảng 6 mm. - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 10 mm",
+          "color": "Màu sắc: Bạc và trắng",
+          "size_Xs": " ",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_3.png"
+        },
+        {
+          "id": 4,
+          "name": "Vòng tay ngọc trai ngôi sao",
+          "price": "60.000đ",
+          "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng tay này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
+          "material": "Chất liệu: Bạc và ngọc trai",
+          "size": "- Chiều dài chuỗi: Khoảng 18 cm (có thể điều chỉnh) - Kích thước hạt ngọc trai: Khoảng 4 mm - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 8 mm",
+          "color": "Màu sắc: Bạc và trắng",
+          "size_Xs": "",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_4.png"
+        },
+        {
+          "id": 5,
+          "name": "Colorful Daisy Chains.",
+          "price": "65.000đ",
+          "description": "Vòng cổ handmade Colorful Daisy được làm từ những hạt ngọc trai và nhiều hạt nhựa màu pastel khác nhau, được sắp xếp thành những bông hoa cúc họa mi nhỏ xinh. Với những tông màu rực rỡ và vẻ ngoài tươi sáng của ngọc trai, tạo cảm giác vui tươi và năng động.Tránh tiếp xúc với nước, hóa chất, chất tẩy rửa mạnh để bảo quản màu sắc sản phẩm lâu hơn.",
+          "material": "",
+          "size": "Free upsize với những bạn có nhu cầu.",
+          "color": "",
+          "size_Xs": "",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_5.png"
+        },
+        {
+          "id": 6,
+          "name": "Vòng tay Dâu tây",
+          "price": "25.000đ",
+          "description": "Vòng tay Dâu tây được thiết kế gồm những hạt ngọc trai nhỏ kết nối với nhau, điểm nhấn là những quả dây tây nhỏ xinh được làm từ các hạt nhựa đỏ và xanh, tạo nên cảm giác trẻ trung, tươi mới và ngọt ngào.Tránh tiếp xúc với nước, hóa chất, chất tẩy rửa mạnh để bảo quản màu sắc sản phẩm lâu hơn.",
+          "material": "",
+          "size": "Size: 13,5cm (+5cm tăng đơ)",
+          "color": "",
+          "size_Xs": " ",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_6.png"
+        },
+        {
+          "id": 7,
+          "name": "Vòng tay Hoa hồng",
+          "price": "55.000đ",
+          "description": "Vòng tay được tạo thành từ nhiều loại hạt  được sắp xếp theo thiết kế hình tròn. Các yếu tố chính bao gồm:- Hạt ngọc trai màu hồng và trắng- Hạt hình giọt nước xanh- Hạt pha lê hoặc thủy tinh nhỏ với nhiều hình dạng khác nhau- Móc cài hoặc charm màu bạc tinh tế với thiết kế hình chữ thập- Một bông hồng nhỏ bằng nhựa màu hồng treo ở giữa",
+          "material": "",
+          "size": "",
+          "color": "",
+          "size_Xs": " ",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_7.png"
+        },
+        {
+          "id": 8,
+          "name": "Vòng tay Hoa hồng đỏ",
+          "price": "70.000đ",
+          "description": "Với thiết kế trẻ trung và các loại hạt với hình dáng và màu sắc khác nhau sẽ mang đến cho bố cục của vòng và outfit của bạn một nét đẹp dễ thương của người con gái Việt Nam",
+          "material": "",
+          "size": "",
+          "color": "",
+          "size_Xs": " ",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_8.png"
+        },
+        {
+          "id": 9,
+          "name": "Vòng tay Ngọc trai",
+          "price": "70.000đ",
+          "description": "Sự kết hợp giữa các vỏ sò, viên ngọc trai và các chi tiết màu sắc biển cả làm cho người mang có cảm giác FRESH năng động và trẻ trung",
+          "material": "",
+          "size": "",
+          "color": "",
+          "size_Xs": " ",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_9.png"
+        },
+        {
+          "id": 10,
+          "name": "Vòng cổ hoa",
+          "price": "60.000đ",
+          "description": "Sự đan xen giữa các hoa nhỏ và hoa lớn và chi tiết ôm sát cổ sẽ là một món phụ kiện khá đặc biệt đối với người mang chúng",
+          "material": "",
+          "size": "",
+          "color": "",
+          "size_Xs": " ",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_10.png"
+        },
+        {
+          "id": 11,
+          "name": "Vòng cổ ngôi sao ngọc trai nữ",
+          "price": "85.000đ",
+          "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng cổ này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
+          "material": "Chất liệu: Bạc và ngọc trai",
+          "size": "- Chiều dài chuỗi: Khoảng 45 cm (có thể điều chỉnh) Kích thước hạt ngọc trai: Khoảng 6 mm. - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 10 mm",
+          "color": "Màu sắc: Bạc và trắng",
+          "size_Xs": " ",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_11.png"
+        },
+        {
+          "id": 12,
+          "name": "Vòng ngọc nơ xinh",
+          "price": "50.000đ",
+          "description": "Với chi tiết nơ xinh sẽ là một điểm nhấn đặc biệt dành cho đôi tay của người phụ nữ giúp tay đỡ trống và thể hiện được tính cách diệu dàng của mình",
+          "material": "",
+          "size": "",
+          "color": "",
+          "size_Xs": " ",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_12.png"
+        },
+        {
+          "id": 13,
+          "name": "Vòng tay chú cá nhỏ",
+          "price": "40.000đ",
+          "description": "Vòng tay chú cá nhỏ được phối giữa các chi tiết kim loại, các hạt và đặc biệt là chú cá nhỏ xinh sẽ là một sự lựa chọn khá thú vị dành cho outfit của bạn.",
+          "material": "",
+          "size": "",
+          "color": "",
+          "size_Xs": " ",
+          "size_M": "",
+          "size_L": "",
+          "image": "images/product/product_13.png"
         }
+      ]
+    }
 
-        // Tìm sản phẩm theo ID
-        var product = productsData.products.find(function (p) {
-            return p.id === parseInt(productId);
-        });
-
-        // Kiểm tra nếu không tìm thấy sản phẩm
-        if (!product) {
-            console.error('Product not found');
-            return;
-        }
-
-        // Hiển thị thông tin sản phẩm trên trang web
-
-        $('#name').text(product.name);
-        $('#price').text('Giá: ' + product.price);
-        if (product.description != '') {
-            $('#description').text(product.description);
-        }
-        if (product.material != '') {
-            $('#material').text(product.material);
-        }
-        if (product.size != '') {
-            $('#size').text('Kích thước: ' + product.size);
-        }
-        if (product.color != '') {
-            $('#color').text(product.color);
-        }
-        if (product.size_Xs != '') {
-            $('#size_Xs').text(product.size_Xs);
-        }
-        if (product.size_M != '') {
-            $('#size_M').text(product.size_M);
-        }
-        if (product.size_L != '') {
-            $('#size_M').text(product.size_L);
-        }
-        if (product.image != '') {
-            $('.image-product').attr('src', product.image);
-        }
+    // Tìm sản phẩm theo ID
+    var product = productsData.products.find(function (p) {
+      return p.id === parseInt(productId);
     });
+
+    // Kiểm tra nếu không tìm thấy sản phẩm
+    if (!product) {
+      console.error('Product not found');
+      return;
+    }
+
+    // Hiển thị thông tin sản phẩm trên trang web
+
+    $('#name').text(product.name);
+    $('#price').text('Giá: ' + product.price);
+    if (product.description != '') {
+      $('#description').text(product.description);
+    }
+    if (product.material != '') {
+      $('#material').text(product.material);
+    }
+    if (product.size != '') {
+      $('#size').text('Kích thước: ' + product.size);
+    }
+    if (product.color != '') {
+      $('#color').text(product.color);
+    }
+    if (product.size_Xs != '') {
+      $('#size_Xs').text(product.size_Xs);
+    }
+    if (product.size_M != '') {
+      $('#size_M').text(product.size_M);
+    }
+    if (product.size_L != '') {
+      $('#size_M').text(product.size_L);
+    }
+    if (product.image != '') {
+      $('.image-product').attr('src', product.image);
+    }
+  });
 </script>
 
 <body>
-    <div class="preloader-wrapper">
-        <div class="preloader">
-        </div>
-      </div>
-      <header>
-        <div class="container py-2">
-          <div class="row py-4 pb-0 pb-sm-4 align-items-center">
-    
-            <div class="col-sm-4 col-lg-2 text-center text-sm-start">
-              <div class="main-logo">
-                <a href="index.html">
-                  <img src="images/icon/logo.png" alt="logo" class="img-fluid img-logo" width="60px">
-                </a>
-              </div>
-            </div>
-    
-            <div class="col-sm-4 offset-sm-2 offset-md-0 col-lg-4 d-none d-lg-block">
-              <div class="search-bar border rounded-2 px-3 border-dark-subtle">
-                <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-                  <input type="text" class="form-control border-0 bg-transparent" placeholder="Tìm kiếm sản phẩm của bạn" />
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                      d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
-                  </svg>
-                </form>
-              </div>
-            </div>
-    
-            <div
-              class="col-sm-10 col-lg-6 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
-              <div class="support-box text-end d-none d-xl-block">
-                <span class="fs-6 secondary-font text-muted">Liên hệ</span>
-                <h5 class="mb-0">097 525 2048</h5>
-              </div>
-              <div class="support-box text-end d-none d-xl-block">
-                <span class="fs-6 secondary-font text-muted">Email</span>
-                <h5 class="mb-0">huyentrang12604@gmaik.com</h5>
-              </div>
-            </div>
+  <div class="preloader-wrapper">
+    <div class="preloader">
+    </div>
+  </div>
+  <header>
+    <div class="container py-2">
+      <div class="row py-4 pb-0 pb-sm-4 align-items-center">
+
+        <div class="col-sm-4 col-lg-2 text-center text-sm-start">
+          <div class="main-logo">
+            <a href="index.html">
+              <img src="images/icon/logo.png" alt="logo" class="img-fluid img-logo" width="60px">
+            </a>
           </div>
         </div>
-    
-        <div class="container-fluid">
-          <hr class="m-0">
+
+        <div class="col-sm-4 offset-sm-2 offset-md-0 col-lg-4 d-none d-lg-block">
+          <div class="search-bar border rounded-2 px-3 border-dark-subtle">
+            <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
+              <input type="text" class="form-control border-0 bg-transparent" placeholder="Tìm kiếm sản phẩm của bạn" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
+              </svg>
+            </form>
+          </div>
         </div>
-    
-        <div class="container">
-          <nav class="main-menu d-flex navbar navbar-expand-lg ">
-    
-            <div class="d-flex d-lg-none align-items-end mt-3">
-              <ul class="d-flex justify-content-end list-unstyled m-0">
-                <li>
-                  <a href="account.html" class="mx-3">
-                    <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                  </a>
-                </li>
-                <li>
-                  <a href="wishlist.html" class="mx-3">
-                    <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
-                  </a>
-                </li>
-    
-                <li>
-                  <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                    aria-controls="offcanvasCart">
-                    <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                    <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                      0
-                    </span>
-                  </a>
-                </li>
-    
-                <li>
-                  <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch"
-                    aria-controls="offcanvasSearch">
-                    <iconify-icon icon="tabler:search" class="fs-4"></iconify-icon>
-                    </span>
-                  </a>
-                </li>
-              </ul>
-    
-            </div>
-    
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-              aria-controls="offcanvasNavbar">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-    
-              <div class="offcanvas-header justify-content-center">
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-              </div>
-    
-              <div class="offcanvas-body justify-content-between">
-    
-    
-                <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
-                  <li class="nav-item">
-                    <a href="index.html" class="nav-link active">Trang chủ</a>
-                  </li>
-                  <!-- <li class="nav-item dropdown">
+
+        <div
+          class="col-sm-10 col-lg-6 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
+          <div class="support-box text-end d-none d-xl-block">
+            <span class="fs-6 secondary-font text-muted">Liên hệ</span>
+            <h5 class="mb-0">097 525 2048</h5>
+          </div>
+          <div class="support-box text-end d-none d-xl-block">
+            <span class="fs-6 secondary-font text-muted">Email</span>
+            <h5 class="mb-0">huyentrang12604@gmail.com</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <hr class="m-0">
+    </div>
+
+    <div class="container">
+      <nav class="main-menu d-flex navbar navbar-expand-lg ">
+
+        <div class="d-flex d-lg-none align-items-end mt-3">
+          <ul class="d-flex justify-content-end list-unstyled m-0">
+            <li>
+              <a href="account.html" class="mx-3">
+                <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+              </a>
+            </li>
+            <li>
+              <a href="wishlist.html" class="mx-3">
+                <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                aria-controls="offcanvasCart">
+                <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
+                <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                  0
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch"
+                aria-controls="offcanvasSearch">
+                <iconify-icon icon="tabler:search" class="fs-4"></iconify-icon>
+                </span>
+              </a>
+            </li>
+          </ul>
+
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+
+          <div class="offcanvas-header justify-content-center">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+
+          <div class="offcanvas-body justify-content-between">
+
+
+            <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link active">Trang chủ</a>
+              </li>
+              <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
                       aria-expanded="false">Pages</a>
                     <ul class="dropdown-menu" aria-labelledby="pages">
@@ -403,66 +400,66 @@
                             class="badge bg-success text-dark ms-2">PRO</span></a></li>
                     </ul>
                   </li> -->
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">Về chúng tôi</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="blog.html" class="nav-link">Liên hệ</a>
-                  </li>
-                </ul>
-    
-                <div class="d-none d-lg-flex align-items-end">
-                  <ul class="d-flex justify-content-end list-unstyled m-0">
-                    <li>
-                      <a href="#" class="mx-3">
-                        <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" class="mx-3">
-                        <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
-                      </a>
-                    </li>
-                    <li class="">
-                      <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                        aria-controls="offcanvasCart">
-                        <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                        <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                          0
-                        </span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Về chúng tôi</a>
+              </li>
+              <li class="nav-item">
+                <a href="blog.html" class="nav-link">Liên hệ</a>
+              </li>
+            </ul>
+
+            <div class="d-none d-lg-flex align-items-end">
+              <ul class="d-flex justify-content-end list-unstyled m-0">
+                <li>
+                  <a href="#" class="mx-3">
+                    <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="mx-3">
+                    <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                    aria-controls="offcanvasCart">
+                    <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
+                    <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                      0
+                    </span>
+                  </a>
+                </li>
+              </ul>
             </div>
-          </nav>
+          </div>
         </div>
-      </header>
-    <div class="containter ">
-      
-        <div class="content mx-auto">
-            <div class="row my-5">
-                <h2>Chi tiết sản phẩm</h2>
-                <div class="card-wrapper">
-                    <div class="card">
-                        <!-- card left -->
-                        <div class="product-imgs">
-                            <div class="img-display">
-                                <div class="img-showcase">
-                                    <img class="image-product" src="images/product/product_1.png" alt=" image">
-                                    <!-- <img src="images/product/product_2.png" alt=" image">
+      </nav>
+    </div>
+  </header>
+  <div class="containter ">
+
+    <div class="content mx-auto">
+      <div class="row my-5">
+        <h2>Chi tiết sản phẩm</h2>
+        <div class="card-wrapper">
+          <div class="card">
+            <!-- card left -->
+            <div class="product-imgs">
+              <div class="img-display">
+                <div class="img-showcase">
+                  <img class="image-product" src="images/product/product_1.png" alt=" image">
+                  <!-- <img src="images/product/product_2.png" alt=" image">
                                     <img src="images/product/product_3.png" alt=" image">
                                     <img src="images/product/product_4.png" alt=" image"> -->
-                                </div>
-                            </div>
-                            <div class="img-select">
-                                <div class="img-item">
-                                    <a href="#" data-id="1">
-                                        <img class="image-product" src="images/product/product_1.png" alt="shoe image">
-                                    </a>
-                                </div>
-                                <!-- <div class="img-item">
+                </div>
+              </div>
+              <div class="img-select">
+                <div class="img-item">
+                  <a href="#" data-id="1">
+                    <img class="image-product" src="images/product/product_1.png" alt="shoe image">
+                  </a>
+                </div>
+                <!-- <div class="img-item">
                                     <a href="#" data-id="2">
                                         <img src="images/product/product_2.png" alt="shoe image">
                                     </a>
@@ -477,239 +474,306 @@
                                         <img src="images/product/product_4.png" alt="shoe image">
                                     </a>
                                 </div> -->
-                            </div>
-                        </div>
-                        <!-- card right -->
-                        <div class="product-content">
-                            <h2 id="name" class="product-title"> Vòng tay handmade hạt thủ công tím mộng mơ dành cho nữ
-                            </h2>
-                            <div class="product-price">
-                                <p class="new-price"><span class="price-title"></span> <span id="price">
-                                        25.000đ</span></p>
-                            </div>
-
-                            <div class="product-detail">
-                                <h2>Giới thiệu sản phẩm: </h2>
-                                <p id="description"></p>
-                                <p id="material"></p>
-                                <p id="size"></p>
-                                <p id="color"></p>
-                                <ul>
-                                    <li id="size_Xs"></li>
-                                    <li id="size_M"></li>
-                                    <li id="size_L"></li>
-                                </ul>
-                            </div>
-
-                            <div class="purchase-info d-flex justify-content-around">
-                                <div class="d-flex ">
-                                    <span class="my-auto mr-2">Số Lượng </span>
-                                    <input class="my-auto" id="quantity" type="number" min="1" max="40" value="1">
-                                </div>
-                                <button type="button" class="btn my-auto btn-payment">Đặt hàng</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-         
+            <!-- card right -->
+            <div class="product-content">
+              <h2 id="name" class="product-title"> Vòng tay handmade hạt thủ công tím mộng mơ dành cho nữ
+              </h2>
+              <div class="product-price">
+                <p class="new-price"><span class="price-title"></span> <span id="price">
+                    25.000đ</span></p>
+              </div>
+
+              <div class="product-detail">
+                <h2>Giới thiệu sản phẩm: </h2>
+                <p id="description"></p>
+                <p id="material"></p>
+                <p id="size"></p>
+                <p id="color"></p>
+                <ul>
+                  <li id="size_Xs"></li>
+                  <li id="size_M"></li>
+                  <li id="size_L"></li>
+                </ul>
+              </div>
+
+              <div class="purchase-info d-flex justify-content-around">
+                <div class="d-flex ">
+                  <span class="my-auto m-2">Số Lượng </span>
+                  <input class="my-auto" id="quantity" type="number" min="1" max="40" value="1">
+                </div>
+                <button type="button" class="btn my-auto btn-payment">Đặt hàng</button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
     </div>
-      <section id="clothing" class="my-5 overflow-hidden">
-        <div class="container pb-5">
-    
-          <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
-            <h3 class="display-3 fw-normal">Sản phẩm mới ra mắt</h3>
-            <div>
-              <!-- <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+  </div>
+  <section id="clothing" class="my-5 overflow-hidden">
+    <div class="container pb-5">
+
+      <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
+        <h3 class="display-3 fw-normal">Sản phẩm mới ra mắt</h3>
+        <div>
+          <!-- <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                 shop now
                 <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                   <use xlink:href="#arrow-right"></use>
                 </svg></a> -->
-            </div>
-          </div>
-    
-          <div class="products-carousel swiper">
-            <div class="swiper-wrapper">
-    
-              <div class="swiper-slide">
-               
-                <div class="card position-relative" style="display:flex">
-                  <a href="product_detail.html?id=1"><img src="images/product/product_1.png" class="img-fluid rounded-4"
-                      alt="image"></a>
-                  <div class="card-body p-0">
-                    <a href="product_detail.html?id=1">
-                      <h3 class="card-title pt-4 m-0">Vòng tay handmde hạt thủ công tím mộng mơ dành cho nữ</h3>
-                    </a>
-    
-                    <div class="card-text">
-                      <span class="rating secondary-font">
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        5.0</span>
-                      <h3 class="secondary-font text-primary">Giá : 25.000đ</h3>
-                      <div class="d-flex flex-wrap mt-3">
-                        <a href="product_detail.html?id=1" class="btn-cart me-3 px-4 pt-3 pb-3">
-                          <h5 class="text-uppercase m-0">Mua ngay</h5>
-                        </a>
-                        <a href="#" class="btn-wishlist px-4 pt-3 ">
-                          <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-               
-                <div class="card position-relative" style="display:flex">
-                  <a href="product_detail.html?id=2"><img src="images/product/product_2.png" class="img-fluid rounded-4"
-                      alt="image"></a>
-                  <div class="card-body p-0">
-                    <a href="product_detail.html?id=2">
-                      <h3 class="card-title pt-4 m-0">Vòng hoa kết pha lê</h3>
-                    </a>
-    
-                    <div class="card-text">
-                      <span class="rating secondary-font">
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        5.0</span>
-                      <h3 class="secondary-font text-primary">Giá: 40.000đ</h3>
-                      <div class="d-flex flex-wrap mt-3">
-                        <a href="product_detail.html?id=2" class="btn-cart me-3 px-4 pt-3 pb-3">
-                          <h5 class="text-uppercase m-0">Mua ngay</h5>
-                        </a>
-                        <a href="#" class="btn-wishlist px-4 pt-3 ">
-                          <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-               
-                <div class="card position-relative" style="display:flex">
-                  <a href="product_detail.html?id=6"><img src="images/product/product_6.png" class="img-fluid rounded-4"
-                      alt="image"></a>
-                  <div class="card-body p-0">
-                    <a href="product_detail.html?id=6">
-                      <h3 class="card-title pt-4 m-0">Vòng tay Dâu tây</h3>
-                    </a>
-    
-                    <div class="card-text">
-                      <span class="rating secondary-font">
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        5.0</span>
-                      <h3 class="secondary-font text-primary">Giá: 25.000đ</h3>
-                      <div class="d-flex flex-wrap mt-3">
-                        <a href="product_detail.html?id=6" class="btn-cart me-3 px-4 pt-3 pb-3">
-                          <h5 class="text-uppercase m-0">Mua ngay</h5>
-                        </a>
-                        <a href="#" class="btn-wishlist px-4 pt-3 ">
-                          <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                
-                <div class="card position-relative" style="display:flex">
-                  <a href="product_detail.html?id=7"><img src="images/product/product_7.png" class="img-fluid rounded-4"
-                      alt="image"></a>
-                  <div class="card-body p-0">
-                    <a href="product_detail.html?id=7
-                    ">
-                      <h3 class="card-title pt-4 m-0">Vòng tay Hoa hồng</h3>
-                    </a>
-    
-                    <div class="card-text">
-                      <span class="rating secondary-font">
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                        5.0</span>
-                      <h3 class="secondary-font text-primary">Giá: 55.000đ</h3>
-                      <div class="d-flex flex-wrap mt-3">
-                        <a href="product_detail.html?id=7" class="btn-cart me-3 px-4 pt-3 pb-3">
-                          <h5 class="text-uppercase m-0">Mua ngay</h5>
-                        </a>
-                        <a href="#" class="btn-wishlist px-4 pt-3 ">
-                          <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-    
-    
-            </div>
-          </div>
-          <!-- / products-carousel -->
-    
-    
         </div>
-      </section>
+      </div>
+
+      <div class="products-carousel swiper">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+
+            <div class="card position-relative" style="display:flex">
+              <a href="product_detail.html?id=1"><img src="images/product/product_1.png" class="img-fluid rounded-4"
+                  alt="image"></a>
+              <div class="card-body p-0">
+                <a href="product_detail.html?id=1">
+                  <h3 class="card-title pt-4 m-0">Vòng tay handmde hạt thủ công tím mộng mơ dành cho nữ</h3>
+                </a>
+
+                <div class="card-text">
+                  <span class="rating secondary-font">
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    5.0</span>
+                  <h3 class="secondary-font text-primary">Giá : 25.000đ</h3>
+                  <div class="d-flex flex-wrap mt-3">
+                    <a href="product_detail.html?id=1" class="btn-cart me-3 px-4 pt-3 pb-3 mb-1">
+                      <h5 class="text-uppercase m-0">Mua ngay</h5>
+                    </a>
+                    <a href="#" class="btn-wishlist px-4 pt-3 ">
+                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+
+            <div class="card position-relative" style="display:flex">
+              <a href="product_detail.html?id=2"><img src="images/product/product_2.png" class="img-fluid rounded-4"
+                  alt="image"></a>
+              <div class="card-body p-0">
+                <a href="product_detail.html?id=2">
+                  <h3 class="card-title pt-4 m-0">Vòng hoa kết pha lê</h3>
+                </a>
+
+                <div class="card-text">
+                  <span class="rating secondary-font">
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    5.0</span>
+                  <h3 class="secondary-font text-primary">Giá: 40.000đ</h3>
+                  <div class="d-flex flex-wrap mt-3">
+                    <a href="product_detail.html?id=2" class="btn-cart me-3 px-4 pt-3 pb-3 mb-1">
+                      <h5 class="text-uppercase m-0">Mua ngay</h5>
+                    </a>
+                    <a href="#" class="btn-wishlist px-4 pt-3 ">
+                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+
+            <div class="card position-relative" style="display:flex">
+              <a href="product_detail.html?id=6"><img src="images/product/product_6.png" class="img-fluid rounded-4"
+                  alt="image"></a>
+              <div class="card-body p-0">
+                <a href="product_detail.html?id=6">
+                  <h3 class="card-title pt-4 m-0">Vòng tay Dâu tây</h3>
+                </a>
+
+                <div class="card-text">
+                  <span class="rating secondary-font">
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    5.0</span>
+                  <h3 class="secondary-font text-primary">Giá: 25.000đ</h3>
+                  <div class="d-flex flex-wrap mt-3">
+                    <a href="product_detail.html?id=6" class="btn-cart me-3 px-4 pt-3 pb-3 mb-1">
+                      <h5 class="text-uppercase m-0">Mua ngay</h5>
+                    </a>
+                    <a href="#" class="btn-wishlist px-4 pt-3 ">
+                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+
+            <div class="card position-relative" style="display:flex">
+              <a href="product_detail.html?id=7"><img src="images/product/product_7.png" class="img-fluid rounded-4"
+                  alt="image"></a>
+              <div class="card-body p-0">
+                <a href="product_detail.html?id=7
+                    ">
+                  <h3 class="card-title pt-4 m-0">Vòng tay Hoa hồng</h3>
+                </a>
+
+                <div class="card-text">
+                  <span class="rating secondary-font">
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                    5.0</span>
+                  <h3 class="secondary-font text-primary">Giá: 55.000đ</h3>
+                  <div class="d-flex flex-wrap mt-3">
+                    <a href="product_detail.html?id=7" class="btn-cart me-3 px-4 pt-3 pb-3 mb-1">
+                      <h5 class="text-uppercase m-0">Mua ngay</h5>
+                    </a>
+                    <a href="#" class="btn-wishlist px-4 pt-3 ">
+                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <!-- / products-carousel -->
+
+
+    </div>
+  </section>
+  <footer id="footer" class="mt-5">
+    <div class="container py-5 ">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="footer-menu">
+            <img src="image/icon/logo.png" alt="logo">
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="footer-menu d-flex flex-column">
+            <h3>Liên hệ chúng tôi</h3>
+            <div class="d-flex mt-3 menu-list list-unstyled w-100 ">
+              <div style="margin-right: 15px;">
+                <a href="">Email</a>
+                <a href="#" class="nav-link px-0">huyentrang12604@gmail.com</a>
+              </div>
+              <div class="mr-3">
+                <a href="">SĐT</a>
+                <a href="#" class="nav-link px-0">097 525 2048</a>
+              </div>
+            </div>
+            <div class="social-links w-100 mt-3 mx-auto">
+              <ul class="d-flex  list-unstyled gap-2 ">
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon" icon="ri:facebook-fill"></iconify-icon>
+                  </a>
+                </li>
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon" icon="ri:twitter-fill"></iconify-icon>
+                  </a>
+                </li>
+
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon" icon="ri:instagram-fill"></iconify-icon>
+                  </a>
+                </li>
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon" icon="ri:youtube-fill"></iconify-icon>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div>
+            <h3>Liên lạc</h3>
+            <p class="blog-paragraph fs-6">Nếu có vấn đề thắc mắc hãy để mail của bạn ở đây để chúng tôi
+              có thể liên lạc</p>
+            <div class="search-bar border rounded-pill border-dark-subtle px-2">
+              <form class="text-center d-flex align-items-center" action="" method="">
+                <input type="text" class="form-control border-0 bg-transparent" placeholder="Để mail của bạn ở đây" />
+                <iconify-icon class="send-icon" icon="tabler:location-filled"></iconify-icon>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
 </body>
 
 <script src="js/jquery-1.11.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-  crossorigin="anonymous"></script>
+  integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="js/plugins.js"></script>
 <script src="js/script.js"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <script>
-    $('.btn-payment').on('click', function () {
-        var urlParams = new URLSearchParams(window.location.search);
-        var productId = urlParams.get('id');
+  $('.btn-payment').on('click', function () {
+    var urlParams = new URLSearchParams(window.location.search);
+    var productId = urlParams.get('id');
 
-        // Kiểm tra nếu 'id' không tồn tại hoặc không phải là số nguyên dương
-        if (!productId || isNaN(productId) || parseInt(productId) <= 0) {
-            console.error('Invalid product ID');
-            return;
-        }
-
-        const quantity = $('#quantity').val();
-        window.location.href = 'pay.html?id=' + productId + '&quantity=' + quantity;
-    });
-
-    const imgs = document.querySelectorAll('.img-select a');
-    const imgBtns = [...imgs];
-    let imgId = 1;
-
-    imgBtns.forEach((imgItem) => {
-        imgItem.addEventListener('click', (event) => {
-            event.preventDefault();
-            imgId = imgItem.dataset.id;
-            slideImage();
-        });
-    });
-
-    function slideImage(){
-        const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
-
-        document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+    // Kiểm tra nếu 'id' không tồn tại hoặc không phải là số nguyên dương
+    if (!productId || isNaN(productId) || parseInt(productId) <= 0) {
+      console.error('Invalid product ID');
+      return;
     }
 
-    window.addEventListener('resize', slideImage);
+    const quantity = $('#quantity').val();
+    window.location.href = 'pay.html?id=' + productId + '&quantity=' + quantity;
+  });
+
+  const imgs = document.querySelectorAll('.img-select a');
+  const imgBtns = [...imgs];
+  let imgId = 1;
+
+  imgBtns.forEach((imgItem) => {
+    imgItem.addEventListener('click', (event) => {
+      event.preventDefault();
+      imgId = imgItem.dataset.id;
+      slideImage();
+    });
+  });
+
+  function slideImage() {
+    const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
+
+    document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+  }
+
+  window.addEventListener('resize', slideImage);
 </script>
 
 </html>

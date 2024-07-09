@@ -1,4 +1,3 @@
-
 /*--------------------------------------------------------------
 /** 1. VARIABLES
 --------------------------------------------------------------*/
@@ -9,12 +8,78 @@
   --header-height-min: 80px;
 }
 
+* {
+  box-sizing: border-box;
+  font-family: "Inconsolata", monospace !important;
+}
+
+.footer-menu img {
+  width: 200px;
+
+}
+
+#footer {
+  background-color: #222222;
+}
+
+#footer * {
+  color: white;
+}
+
 /* on mobile devices below 600px
  */
 @media screen and (max-width: 600px) {
   :root {
     --header-height: 100px;
     --header-height-min: 80px;
+  }
+
+  .img-showcase img.image-product {
+    width: 85% !important;
+    min-width: 85% !important;
+  }
+
+  .sale {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .sale input {
+    width: 100% !important;
+  }
+
+  .sale div {
+    margin: 3px auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .total {
+    font-size: small;
+  }
+
+  li.list-group-item div {
+    max-width: 65%;
+  }
+
+  .sum {
+    font-size: small;
+  }
+
+  .img-item a img {
+    height: 50px !important;
+    width: 50px !important;
+    margin: 5px;
+  }
+
+  .card .card-body {
+
+    width: 220px;
+  }
+
+  .card-title {
+    height: 120px;
   }
 }
 
@@ -31,10 +96,13 @@
 }
 
 /* Fonts */
-:root {
-  --body-font: 'Chilanka', cursive;
-  --heading-font: 'Chilanka', cursive;
-  --secondary-font: 'Montserrat', sans-serif;
+font-family::root {
+  --body-font: "Inconsolata",
+    monospace;
+  --heading-font: "Inconsolata",
+    monospace;
+  --secondary-font: "Inconsolata",
+    monospace;
 }
 
 
@@ -88,13 +156,15 @@ body {
   --bs-btn-disabled-bg: #d3d7dd;
   --bs-btn-disabled-border-color: transparent;
 }
-.new-product{
+
+.new-product {
   background-color: wheat;
   transition: 0.4s;
   color: black;
   font-weight: bold;
   border: transparent;
 }
+
 .btn-outline-primary {
   transition: all 0.3s ease-in;
   padding: 1.2rem 3rem;
@@ -135,19 +205,23 @@ body {
   --bs-btn-disabled-border-color: #41403E;
   --bs-gradient: none;
 }
-.card-body{
-  height: 300px;
+
+.card-body {
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .img-fluid {
   height: 300px;
 }
-.img-logo{
+
+.img-logo {
   width: 60px;
   height: 60px;
 }
+
 .btn-dark {
   padding: 1.2rem 3rem;
   font-size: 1.1875rem;
@@ -358,7 +432,7 @@ a.btn-wishlist {
 }
 
 
-/* pet foodies style  */
+/* Sản phẩm bán chạy style  */
 button.filter-button {
   letter-spacing: 0.02125rem;
   border: none;

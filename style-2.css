@@ -1,12 +1,8 @@
-* {
-    box-sizing: border-box;
-    font-family: "Chilanka", cursive;
-}
-
 div.logo,
 div.contact {
     width: fit-content;
 }
+
 
 .w10 {
     width: 10%;
@@ -16,16 +12,19 @@ div.contact {
     max-width: 1300px;
     width: 100%;
 }
-.new-product{
+
+.new-product {
     background-color: wheat;
     transition: 0.4s;
     color: black;
     font-weight: bold;
     border: transparent;
 }
-.img-logo{
-    max-width: 60px!important;
+
+.img-logo {
+    max-width: 60px !important;
 }
+
 div.title a {
     color: white;
     font-weight: bold;
