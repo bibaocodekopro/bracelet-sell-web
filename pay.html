@@ -241,10 +241,11 @@
         // Hiển thị thông tin sản phẩm trên trang web
 
         $('.name-product').text(product.name)
-        $('.total').text(product.name + ' x ' + quantity);
+        $('.total').text( quantity);
         var price = product.price.replace(/\./g, '');
         $('.sum').text(product.price + ' x ' + quantity);
         var endTotal = parseInt(price) * parseInt(quantity);
+        $('#sumMoney').val(endTotal)
         endTotal = endTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + 'đ';
         $('.end-total').text(endTotal)
     });
@@ -444,6 +445,7 @@
                             <span class="text-muted">Giỏ hàng</span>
                             <span class="badge badge-secondary badge-pill">2</span>
                         </h4>
+                        <input type="hidden" id="sumMoney">
                         <ul class="list-group mb-3">
 
                             <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -745,23 +747,73 @@
     <script src="js/plugins.js"></script>
     <script src="js/script.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <script>
+  
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCmXA5A1FnQbimvuP03yT74V1aO90JDYtA",
+            authDomain: "bracelet-sell.firebaseapp.com",
+            projectId: "bracelet-sell",
+            storageBucket: "bracelet-sell.appspot.com",
+            messagingSenderId: "749485716327",
+            appId: "1:749485716327:web:297fc24b8c0d10d4d7b5c2"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
         function isVietnamesePhoneNumber(number) {
             return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
         }
-        $('#order').on('click', function () {
-            var name = $('#name').val()
-            var address = $('#address').val()
-            var phoneNumber = $('#phoneNumber').val()
-            if (name == '' || address == '' || phoneNumber == '') {
-                alert('Vui lòng nhập đủ!')
-            } else if (isVietnamesePhoneNumber(phoneNumber) == false) {
-                alert('Vui lòng nhập đúng định dạng số điện thoại')
-            } else {
-                window.location.href = 'done.html'
-            }
-        })
+
+        $(document).ready(function() {
+            $('#order').on('click', function () {
+                var name = $('#name').val();
+                var address = $('#address').val();
+                var phoneNumber = $('#phoneNumber').val();
+                var nameProduct = $('.name-product').text();
+                var quantity = parseInt($('.total').text());
+                var sum =  $('#sumMoney').val();
+        
+
+                var currentdate = new Date(); 
+                var time = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+                if (name === '' || address === '' || phoneNumber === '') {
+                    alert('Vui lòng nhập đủ!');
+                } else if (!isVietnamesePhoneNumber(phoneNumber)) {
+                    alert('Vui lòng nhập đúng định dạng số điện thoại');
+                } else {
+                    // Generate a new order reference with a unique key
+                    const newOrderRef = push(ref(database, 'orders'));
+                    set(newOrderRef, {
+                        userName: name,
+                        address: address,
+                        phoneNumber: phoneNumber,
+                        nameProduct: nameProduct,
+                        quantity: quantity,
+                        sum: sum,
+                        time:time
+                    }).then(() => {
+                        window.location.href = 'done.html';
+                    }).catch((error) => {
+                        console.error('Error adding document: ', error);
+                    });
+                }
+            });
+        });
     </script>
+    
+    
 </body>
 
 </html>

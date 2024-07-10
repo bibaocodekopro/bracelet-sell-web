@@ -21,6 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style-2.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 </head>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -32,225 +33,156 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function () {
-        // Lấy giá trị của tham số 'id' từ URL
-        var urlParams = new URLSearchParams(window.location.search);
-        var productId = urlParams.get('id');
-        var quantity = urlParams.get('quantity');
 
-        console.log('Product ID:', productId);
-        console.log('Quantity:', quantity);
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+    const firebaseConfig = {
+        apiKey: "AIzaSyCmXA5A1FnQbimvuP03yT74V1aO90JDYtA",
+        authDomain: "bracelet-sell.firebaseapp.com",
+        projectId: "bracelet-sell",
+        storageBucket: "bracelet-sell.appspot.com",
+        messagingSenderId: "749485716327",
+        appId: "1:749485716327:web:297fc24b8c0d10d4d7b5c2"
+    };
 
 
-        // Kiểm tra nếu 'id' không tồn tại hoặc không phải là số nguyên dương
-        if (!productId || isNaN(productId) || parseInt(productId) <= 0) {
-            console.error('Invalid product ID');
-            return;
-        } if (!quantity || isNaN(quantity)) {
-            console.error('Invalid quantity ');
-            return;
-        }
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const dbRef = ref(database);
 
-        // Lấy dữ liệu từ file JSON (giả sử đã load sẵn trong HTML)
-        var productsData = {
-            "products": [
-                {
-                    "id": 1,
-                    "name": "Vòng tay handmade hạt thủ công tím mộng mơ dành cho nữ",
-                    "price": "25.000đ",
-                    "description": "Vòng tay được tạo bằng những hạt lưu ly nhiều màu sắc - từ hồng, tím đến trắng, được đan kết thành những sợi dây mảnh mai. Những bông hoa nhỏ xinh bằng ngọc trai tô điểm thêm vẻ duyên dáng và nữ tính cho thiết kế. Tổng thể mang vẻ đẹp tinh khôi, lãng mạn và nhẹ nhàng, phù hợp cho mọi cô nàng.",
-                    "material": "",
-                    "size": "17cm + tăng đơ",
-                    "color": "",
-                    "size_Xs": "",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_1.png"
-                },
-                {
-                    "id": 2,
-                    "name": "Vòng hoa kết pha lê",
-                    "price": "40.000đ",
-                    "description": "Đây là một thiết kế vòng tay với sự kết hợp tinh tế giữa những viên ngọc trai trắng tạo thành hình nơ với hạt pha lê hình trái tim màu hồng và các viên đá màu xanh lá cây. Chúng tạo thành một tác phẩm handmade tinh xảo, toát lên vẻ đẹp mong manh, lãng mạn và độc đáo. Thật là một món trang sức duyên dáng và đáng yêu dành cho phái nữ.",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": "15cm + tăng đơ",
-                    "size_M": "17cm + tăng đơ",
-                    "size_L": "19cm + tăng đơ",
-                    "image": "images/product/product_2.png"
-                },
-                {
-                    "id": 3,
-                    "name": "Vòng cổ ngôi sao ngọc trai nữ",
-                    "price": "85.000đ",
-                    "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng cổ này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
-                    "material": "Chất liệu: Bạc và ngọc trai",
-                    "size": "- Chiều dài chuỗi: Khoảng 45 cm (có thể điều chỉnh) Kích thước hạt ngọc trai: Khoảng 6 mm. - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 10 mm",
-                    "color": "Màu sắc: Bạc và trắng",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_3.png"
-                },
-                {
-                    "id": 4,
-                    "name": "Vòng tay ngọc trai ngôi sao",
-                    "price": "60.000đ",
-                    "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng tay này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
-                    "material": "Chất liệu: Bạc và ngọc trai",
-                    "size": "- Chiều dài chuỗi: Khoảng 18 cm (có thể điều chỉnh) - Kích thước hạt ngọc trai: Khoảng 4 mm - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 8 mm",
-                    "color": "Màu sắc: Bạc và trắng",
-                    "size_Xs": "",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_4.png"
-                },
-                {
-                    "id": 5,
-                    "name": "Colorful Daisy Chains.",
-                    "price": "65.000đ",
-                    "description": "Vòng cổ handmade Colorful Daisy được làm từ những hạt ngọc trai và nhiều hạt nhựa màu pastel khác nhau, được sắp xếp thành những bông hoa cúc họa mi nhỏ xinh. Với những tông màu rực rỡ và vẻ ngoài tươi sáng của ngọc trai, tạo cảm giác vui tươi và năng động.Tránh tiếp xúc với nước, hóa chất, chất tẩy rửa mạnh để bảo quản màu sắc sản phẩm lâu hơn.",
-                    "material": "",
-                    "size": "Free upsize với những bạn có nhu cầu.",
-                    "color": "",
-                    "size_Xs": "",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_5s.png"
-                },
-                {
-                    "id": 6,
-                    "name": "Vòng tay Dâu tây",
-                    "price": "25.000đ",
-                    "description": "Vòng tay Dâu tây được thiết kế gồm những hạt ngọc trai nhỏ kết nối với nhau, điểm nhấn là những quả dây tây nhỏ xinh được làm từ các hạt nhựa đỏ và xanh, tạo nên cảm giác trẻ trung, tươi mới và ngọt ngào.Tránh tiếp xúc với nước, hóa chất, chất tẩy rửa mạnh để bảo quản màu sắc sản phẩm lâu hơn.",
-                    "material": "",
-                    "size": "Size: 13,5cm (+5cm tăng đơ)",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_6.png"
-                },
-                {
-                    "id": 7,
-                    "name": "Vòng tay Hoa hồng",
-                    "price": "55.000đ",
-                    "description": "Vòng tay được tạo thành từ nhiều loại hạt  được sắp xếp theo thiết kế hình tròn. Các yếu tố chính bao gồm:- Hạt ngọc trai màu hồng và trắng- Hạt hình giọt nước xanh- Hạt pha lê hoặc thủy tinh nhỏ với nhiều hình dạng khác nhau- Móc cài hoặc charm màu bạc tinh tế với thiết kế hình chữ thập- Một bông hồng nhỏ bằng nhựa màu hồng treo ở giữa",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_7.png"
-                },
-                {
-                    "id": 8,
-                    "name": "Vòng tay Hoa hồng đỏ",
-                    "price": "70.000đ",
-                    "description": "Với thiết kế trẻ trung và các loại hạt với hình dáng và màu sắc khác nhau sẽ mang đến cho bố cục của vòng và outfit của bạn một nét đẹp dễ thương của người con gái Việt Nam",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_8.png"
-                },
-                {
-                    "id": 9,
-                    "name": "Vòng tay Ngọc trai",
-                    "price": "70.000đ",
-                    "description": "Sự kết hợp giữa các vỏ sò, viên ngọc trai và các chi tiết màu sắc biển cả làm cho người mang có cảm giác FRESH năng động và trẻ trung",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_9.png"
-                },
-                {
-                    "id": 10,
-                    "name": "Vòng cổ hoa",
-                    "price": "60.000đ",
-                    "description": "Sự đan xen giữa các hoa nhỏ và hoa lớn và chi tiết ôm sát cổ sẽ là một món phụ kiện khá đặc biệt đối với người mang chúng",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_10.png"
-                },
-                {
-                    "id": 11,
-                    "name": "Vòng cổ ngôi sao ngọc trai nữ",
-                    "price": "85.000đ",
-                    "description": "Kiểu dáng: Chuỗi hạt bạc mỏng, xỏ xen kẽ các hạt ngọc trai trắng và mặt dây chuyền hình ngôi sao. Vòng cổ này có phong cách đơn giản nhưng thanh lịch, phù hợp để đeo hàng ngày hoặc trong các dịp đặc biệt. Nó có thể được kết hợp với nhiều trang phục khác nhau, từ trang phục bình thường đến trang phục sang trọng.",
-                    "material": "Chất liệu: Bạc và ngọc trai",
-                    "size": "- Chiều dài chuỗi: Khoảng 45 cm (có thể điều chỉnh) Kích thước hạt ngọc trai: Khoảng 6 mm. - Kích thước mặt dây chuyền hình ngôi sao: Khoảng 10 mm",
-                    "color": "Màu sắc: Bạc và trắng",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_11.png"
-                },
-                {
-                    "id": 12,
-                    "name": "Vòng ngọc nơ xinh",
-                    "price": "50.000đ",
-                    "description": "Với chi tiết nơ xinh sẽ là một điểm nhấn đặc biệt dành cho đôi tay của người phụ nữ giúp tay đỡ trống và thể hiện được tính cách diệu dàng của mình",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_12.png"
-                },
-                {
-                    "id": 13,
-                    "name": "Vòng tay chú cá nhỏ",
-                    "price": "40.000đ",
-                    "description": "Vòng tay chú cá nhỏ được phối giữa các chi tiết kim loại, các hạt và đặc biệt là chú cá nhỏ xinh sẽ là một sự lựa chọn khá thú vị dành cho outfit của bạn.",
-                    "material": "",
-                    "size": "",
-                    "color": "",
-                    "size_Xs": " ",
-                    "size_M": "",
-                    "size_L": "",
-                    "image": "images/product/product_13.png"
-                }
-            ]
-        }
+    const ordersRef = ref(database, 'orders');
+    const snapshot = await get(child(dbRef, 'orders'));
+    const orders = snapshot.val();
+    displayOrders(orders);
+    // Lấy dữ liệu từ Firebase Realtime Database
 
-        // Tìm sản phẩm theo ID
-        var product = productsData.products.find(function (p) {
-            return p.id === parseInt(productId);
+    // Hàm hiển thị đơn hàng và tính tổng doanh thu
+    function displayOrders(orders) {
+        const tableBody = document.getElementById('ordersTableBody');
+        let totalRevenue = 0;
+
+        // Xóa nội dung cũ trong bảng
+        tableBody.innerHTML = '';
+
+        // Lặp qua từng đơn hàng và hiển thị trên bảng
+        Object.values(orders).forEach(order => {
+            const orderDateParts = order.time.split(' '); // Tách ngày và giờ từ chuỗi 'dd/mm/yyyy hh:mm:ss'
+            const orderDate = orderDateParts[0]; // Lấy ngày từ chuỗi đã tách
+
+            // Tạo hàng mới trong bảng
+            const row = `
+            <tr>
+                <td>${order.address}</td>
+                <td>${order.nameProduct}</td>
+                <td>${order.phoneNumber}</td>
+                <td>${order.quantity}</td>
+                <td>${order.sum} đ</td>
+                <td>${orderDate}</td>
+                <td>${order.userName}</td>
+            </tr>
+        `;
+
+            // Thêm hàng vào bảng
+            tableBody.innerHTML += row;
+
+            // Cộng tổng doanh thu
+            totalRevenue += parseInt(order.sum);
         });
 
-        // Kiểm tra nếu không tìm thấy sản phẩm
-        if (!product) {
-            console.error('Product not found');
-            return;
+        // Hiển thị tổng doanh thu
+        const totalRevenueElement = document.getElementById('totalRevenue');
+        totalRevenueElement.textContent = `Tổng doanh thu: ${formatCurrency(totalRevenue)} đ`;
+
+    }
+    function formatCurrency(amount) {
+        return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+    try {
+        const snapshot = await get(child(dbRef, 'orders'));
+        const orders = snapshot.val();
+
+        // Tạo đối tượng để lưu trữ doanh thu theo ngày
+        const revenueByDate = {};
+
+        // Tính toán doanh thu theo từng ngày từ dữ liệu đơn hàng
+        for (const key in orders) {
+            const order = orders[key];
+            const dateParts = order.time.split(' '); // Tách ngày và giờ từ chuỗi 'dd/mm/yyyy hh:mm:ss'
+            const fullDate = dateParts[0]; // Lấy ngày tháng năm trong chuỗi
+
+            // Chuyển đổi sum thành số nguyên (loại bỏ ký tự 'đ' và dấu phân cách)
+            const amount = parseInt(order.sum);
+
+            if (revenueByDate[fullDate]) {
+                revenueByDate[fullDate] += amount; // Cộng thêm vào tổng doanh thu của ngày đã có
+            } else {
+                revenueByDate[fullDate] = amount; // Tạo mới tổng doanh thu cho ngày chưa có
+            }
         }
 
-        // Hiển thị thông tin sản phẩm trên trang web
+        // Tạo mảng labels và data để hiển thị trên biểu đồ
+        const labels = [];
+        const data = [];
 
-        $('.name-product').text(product.name)
-        $('.total').text(product.name + ' x ' + quantity);
-        var price = product.price.replace(/\./g, '');
-        $('.sum').text(product.price + ' x ' + quantity);
-        var endTotal = parseInt(price) * parseInt(quantity);
-        endTotal = endTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + 'đ';
-        $('.end-total').text(endTotal)
-    });
+        // Lặp qua từng ngày trong tháng để tạo labels và data
+        const now = new Date();
+        const today = now.getDate();
+
+        for (let i = 1; i <= today; i++) {
+            const dateStr = i.toString().padStart(2, '0'); // Định dạng ngày thành '01', '02', ..., '31'
+            const fullDateStr = `${dateStr}/${now.getMonth() + 1}/${now.getFullYear()}`; // Định dạng dd/mm/yyyy
+            labels.push(fullDateStr); // Thêm ngày vào labels
+
+            // Nếu có doanh thu cho ngày này, thêm vào data; nếu không, thêm 0
+            if (revenueByDate[fullDateStr]) {
+                data.push(revenueByDate[fullDateStr]);
+            } else {
+                data.push(0);
+            }
+        }
+
+        // Tạo biểu đồ bằng Chart.js
+        var ctx = document.getElementById('revenueChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Doanh thu (VND)',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Ngày trong tháng'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Doanh thu (VND)'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+
+        });
+    } catch (error) {
+        console.error('Error getting data:', error);
+    }
+
+    // Hàm hiển thị đơn hàng và tính tổng doanh thu
 
 </script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body>
     <div class="preloader-wrapper">
@@ -432,6 +364,35 @@
     </header>
     <div class="containter pb-5">
         <main role="main">
+            <div class="container mt-4">
+                <h2>Tổng doanh thu</h2>
+                <p id="totalRevenue" style="color: black;"></p>
+            </div>
+           
+
+            <div class="container mt-4">
+                <h2>Biểu đồ doanh thu theo ngày trong tháng</h2>
+                <canvas id="revenueChart" style=" margin-top: 20px;"></canvas>
+            </div>
+            <div class="container mt-4" id="">
+                <h2>Chi tiết doanh thu</h2>
+                <table class="table" id="myTable">
+                    <thead>
+                        <tr>
+                            <th>Địa chỉ</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số điện thoại</th>
+                            <th>Số lượng</th>
+                            <th>Tổng tiền</th>
+                            <th>Ngày</th>
+                            <th>Tên người đặt</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+
+                    </tbody>
+                </table>
+            </div>
             <div class="container mt-4">
                 <h2>Thống kê lượt truy cập trong tháng này</h2>
                 <canvas id="accessLogChart" style=" margin-top: 20px;"></canvas>
@@ -672,8 +633,21 @@
     <script src="js/plugins.js"></script>
     <script src="js/script.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
     <script>
-        // Hàm tạo dữ liệu giả cho mỗi ngày từ đầu tháng đến hôm nay
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "paging": true,      // Cho phép phân trang
+                "lengthMenu": [5, 10, 20],  // Cấu hình số lượng hàng trên mỗi trang
+                "pageLength": 5,     // Số hàng mặc định trên mỗi trang
+                "searching": true,   // Cho phép tìm kiếm
+                "ordering": true     // Cho phép sắp xếp
+            });
+        });
+        const now = new Date();
+        const today = now.getDate();
+
+
         function generateFakeData() {
             var data = [];
             var now = new Date();
@@ -720,7 +694,9 @@
 
             var labels = [];
             for (var i = 1; i <= fakeData.length; i++) {
-                labels.push(i);
+                var dateStr = i.toString().padStart(2, '0'); // Định dạng ngày thành '01', '02', ..., '31'
+                var fullDateStr = `${dateStr}/${now.getMonth() + 1}/${now.getFullYear()}`; // Định dạng dd/mm/yyyy
+                labels.push(fullDateStr); // Thêm ngày vào labels
             }
 
             var chart = new Chart(ctx, {
